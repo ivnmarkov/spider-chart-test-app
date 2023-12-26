@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+  font-size: 12px;
+}
+
+.App h2 {
+  padding: 16px 16px 12px;
+  margin: 0;
+  text-align: left;
+}
+
+.control-buttons-container {
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+  margin: 0 16px 35px;
+}
+
+.chart-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,10 @@
+.legend-container {
+  position: relative;
+}
+.legend-item {
+  position: absolute;
+  word-wrap: break-word;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
