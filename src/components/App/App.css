@@ -1,17 +1,23 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-size: 12px;
 }
 
 .App h2 {
+  width: 520px;
   padding: 16px 16px 12px;
   margin: 0;
   text-align: left;
 }
 
 .control-buttons-container {
+  width: 520px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   cursor: pointer;
   margin: 0 16px 35px;
 }
