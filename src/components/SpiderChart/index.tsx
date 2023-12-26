@@ -103,12 +103,14 @@ const SpiderChart = ({
         onAnimationFinish,
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (isReady) {
       drawChart();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady, angleSlice, activeAxis, numberOfAxes, data, activeNames]);
 
   return (
