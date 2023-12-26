@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { COLORS, CHART, DATA_KEYS } from "../../constants";
+import { COLORS, CHART } from "../../constants";
 import ChartBackground from "./classes/ChartBackground";
 import ChartAxis from "./classes/ChartAxis";
 import ChartPolygon from "./classes/ChartPolygon";
 import ChartPoint from "./classes/ChartPoint";
+import ChartDatasetInitialAnimation from "./classes/ChartDatasetInitialAnimation";
 
 const SpiderChart = ({
   data,
@@ -24,7 +25,13 @@ const SpiderChart = ({
   const numberOfAxes = metrics.length;
   const angleSlice = (Math.PI * 2) / numberOfAxes;
 
-  useEffect(() => {
+  const [isReady, setIsReady] = useState(false);
+
+  const onAnimationFinish = () => {
+    setIsReady(true);
+  };
+
+  const drawChart = () => {
     if (svgRef.current) {
       const svg = svgRef.current as SVGSVGElement;
       svg.innerHTML = "";
@@ -47,6 +54,7 @@ const SpiderChart = ({
         }
       }
 
+      // Draw dataset polygons with active points
       Object.entries(data).forEach(([key, values], dataIndex) => {
         const datasetActiveColor =
           COLORS[`dataset${dataIndex + 1}` as keyof typeof COLORS];
@@ -61,6 +69,7 @@ const SpiderChart = ({
             ? datasetBlurredColor
             : datasetActiveColor;
 
+        // Dataset polygon
         const chartPolygon = new ChartPolygon({
           values,
           color: polygonColor,
@@ -84,9 +93,23 @@ const SpiderChart = ({
         }
       });
     }
-  }, [angleSlice, activeAxis, numberOfAxes, data, activeNames]);
+  };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (svgRef.current) {
+      new ChartDatasetInitialAnimation({
+        data,
+        svg: svgRef.current,
+        onAnimationFinish,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isReady) {
+      drawChart();
+    }
+  }, [isReady, angleSlice, activeAxis, numberOfAxes, data, activeNames]);
 
   return (
     <div style={{ position: "absolute" }}>

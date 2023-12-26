@@ -8,6 +8,7 @@ export const COLORS: { [key: string]: string } = {
   dataset1_blurred: "#ff913333",
   dataset2: "#FFE99A",
   dataset2_blurred: "#ffe99a33",
+  invisible: "#0000",
 };
 
 export const CHART = {
